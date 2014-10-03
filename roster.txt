@@ -1,0 +1,13 @@
+Hello everyone! I see that you have found our roster file. 
+
+This file is going to be used in order to demonstrate how to make changes to files using Git ang Github.
+
+So please, without changing anything else in this file, add your Full name and Github username to the file.
+
+Thanks!
+
+-Your Snap! Below the Line Facilitators. 
+
+ADD YOUR CODE *ahem* NAME HERE
+
+
