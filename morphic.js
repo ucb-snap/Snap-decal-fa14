@@ -2201,7 +2201,7 @@ Morph.prototype.init = function () {
     Morph.uber.init.call(this);
     this.isMorph = true;
     this.bounds = new Rectangle(0, 0, 50, 40);
-    this.color = new Color(250, 0, 0);
+    this.color = new Color(80, 80, 80);
     this.texture = null; // optional url of a fill-image
     this.cachedTexture = null; // internal cache of actual bg image
     this.alpha = 1;
