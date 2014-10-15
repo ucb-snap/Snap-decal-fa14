@@ -168,9 +168,9 @@ SpriteMorph.prototype.categories =
     ];
 
 SpriteMorph.prototype.blockColor = {
-    motion : new Color(74, 108, 212),
-    looks : new Color(143, 86, 227),
-    sound : new Color(207, 74, 217),
+    motion : new Color(255-74, 255-108, 255-212),
+    looks : new Color(255-143, 255-86, 255-227),
+    sound : new Color(255-207, 255-74, 255-217),
     pen : new Color(0, 161, 120),
     control : new Color(230, 168, 34),
     sensing : new Color(4, 148, 220),
