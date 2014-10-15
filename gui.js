@@ -82,6 +82,13 @@ var WardrobeMorph;
 var SoundIconMorph;
 var JukeboxMorph;
 
+purple = new Color(220, 153, 255);
+blue = new Color(81, 203, 255);
+fuschia = new Color(255, 122, 222);
+magenta = new Color(255, 61, 152);
+skyblue = new Color(120, 214, 255);
+pink = new Color(250, 160, 215);
+
 // IDE_Morph ///////////////////////////////////////////////////////////
 
 // I am SNAP's top-level frame, the Editor window
@@ -96,7 +103,7 @@ IDE_Morph.uber = Morph.prototype;
 
 IDE_Morph.prototype.setDefaultDesign = function () {
     MorphicPreferences.isFlat = false;
-    SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+    SpriteMorph.prototype.paletteColor = purple;
     SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
     StageMorph.prototype.paletteTextColor
         = SpriteMorph.prototype.paletteTextColor;
@@ -105,11 +112,11 @@ IDE_Morph.prototype.setDefaultDesign = function () {
         = SpriteMorph.prototype.paletteColor.lighter(30);
 
     IDE_Morph.prototype.buttonContrast = 30;
-    IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+    IDE_Morph.prototype.backgroundColor = magenta;
     IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
 
     IDE_Morph.prototype.groupColor
-        = SpriteMorph.prototype.paletteColor.lighter(8);
+        = pink;
     IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
     IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
     IDE_Morph.prototype.tabColors = [
@@ -119,15 +126,15 @@ IDE_Morph.prototype.setDefaultDesign = function () {
     ];
     IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
     IDE_Morph.prototype.appModeColor = new Color();
-    IDE_Morph.prototype.scriptsPaneTexture = 'scriptsPaneTexture.gif';
+    IDE_Morph.prototype.scriptsPaneTexture = 'unisheengrad.jpg';
     IDE_Morph.prototype.padding = 5;
 
     SpriteIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
+        = new Color(255, 255, 255);
     CostumeIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
+        = purple;
     SoundIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
+        = purple;
     TurtleIconMorph.prototype.labelColor
         = IDE_Morph.prototype.buttonLabelColor;
 };
@@ -409,7 +416,7 @@ IDE_Morph.prototype.createLogo = function () {
     }
 
     this.logo = new Morph();
-    this.logo.texture = 'snap_logo_sm.png';
+    this.logo.texture = 'carlbody.png';
     this.logo.drawNew = function () {
         this.image = newCanvas(this.extent());
         var context = this.image.getContext('2d'),
@@ -419,8 +426,8 @@ IDE_Morph.prototype.createLogo = function () {
                 this.width(),
                 0
             );
-        gradient.addColorStop(0, 'black');
-        gradient.addColorStop(0.5, myself.frameColor.toString());
+        gradient.addColorStop(0, 'magenta');
+        gradient.addColorStop(0.5, purple.toString());
         context.fillStyle = MorphicPreferences.isFlat ?
                 myself.frameColor.toString() : gradient;
         context.fillRect(0, 0, this.width(), this.height());
@@ -473,7 +480,7 @@ IDE_Morph.prototype.createControlBar = function () {
     }
 
     this.controlBar = new Morph();
-    this.controlBar.color = this.frameColor;
+    this.controlBar.color = purple;
     this.controlBar.setHeight(this.logo.height()); // height is fixed
     this.controlBar.mouseClickLeft = function () {
         this.world().fillPage();
@@ -495,13 +502,13 @@ IDE_Morph.prototype.createControlBar = function () {
     );
 
     button.corner = 12;
-    button.color = colors[0];
-    button.highlightColor = colors[1];
-    button.pressColor = colors[2];
+    button.color = skyblue;
+    button.highlightColor = blue;
+    button.pressColor = blue;
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
-    button.labelShadowColor = colors[1];
+    button.labelShadowColor = magenta;
     button.labelColor = this.buttonLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
@@ -527,13 +534,13 @@ IDE_Morph.prototype.createControlBar = function () {
     );
 
     button.corner = 12;
-    button.color = colors[0];
-    button.highlightColor = colors[1];
-    button.pressColor = colors[2];
+    button.color = skyblue;
+    button.highlightColor = blue;
+    button.pressColor = blue;
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
-    button.labelShadowColor = colors[1];
+    button.labelShadowColor = blue;
     button.labelColor = this.buttonLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
@@ -629,9 +636,9 @@ IDE_Morph.prototype.createControlBar = function () {
         //'\u270E'
     );
     button.corner = 12;
-    button.color = colors[0];
-    button.highlightColor = colors[1];
-    button.pressColor = colors[2];
+    button.color = skyblue;
+    button.highlightColor = blue;
+    button.pressColor = blue;
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
@@ -653,9 +660,9 @@ IDE_Morph.prototype.createControlBar = function () {
         //'\u2699'
     );
     button.corner = 12;
-    button.color = colors[0];
-    button.highlightColor = colors[1];
-    button.pressColor = colors[2];
+    button.color = skyblue;
+    button.highlightColor = blue;
+    button.pressColor = blue;
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
@@ -676,9 +683,9 @@ IDE_Morph.prototype.createControlBar = function () {
         new SymbolMorph('cloud', 11)
     );
     button.corner = 12;
-    button.color = colors[0];
-    button.highlightColor = colors[1];
-    button.pressColor = colors[2];
+    button.color = skyblue;
+    button.highlightColor = blue;
+    button.pressColor = blue;
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
@@ -931,7 +938,7 @@ IDE_Morph.prototype.createSpriteBar = function () {
     }
 
     this.spriteBar = new Morph();
-    this.spriteBar.color = this.frameColor;
+    this.spriteBar.color = pink;
     this.add(this.spriteBar);
 
     function addRotationStyleButton(rotationStyle) {
@@ -1041,7 +1048,7 @@ IDE_Morph.prototype.createSpriteBar = function () {
     padlock.tick.shadowOffset = MorphicPreferences.isFlat ?
             new Point() : new Point(-1, -1);
     padlock.tick.shadowColor = new Color(); // black
-    padlock.tick.color = this.buttonLabelColor;
+    padlock.tick.color = fuschia;
     padlock.tick.isBold = false;
     padlock.tick.drawNew();
 
@@ -1218,7 +1225,7 @@ IDE_Morph.prototype.createCorralBar = function () {
     }
 
     this.corralBar = new Morph();
-    this.corralBar.color = this.frameColor;
+    this.corralBar.color = purple;
     this.corralBar.setHeight(this.logo.height()); // height is fixed
     this.add(this.corralBar);
 
@@ -1229,9 +1236,9 @@ IDE_Morph.prototype.createCorralBar = function () {
         new SymbolMorph("turtle", 14)
     );
     newbutton.corner = 12;
-    newbutton.color = colors[0];
-    newbutton.highlightColor = colors[1];
-    newbutton.pressColor = colors[2];
+    newbutton.color = skyblue;
+    newbutton.highlightColor = blue;
+    newbutton.pressColor = blue;
     newbutton.labelMinExtent = new Point(36, 18);
     newbutton.padding = 0;
     newbutton.labelShadowOffset = new Point(-1, -1);
@@ -1251,9 +1258,9 @@ IDE_Morph.prototype.createCorralBar = function () {
         new SymbolMorph("brush", 15)
     );
     paintbutton.corner = 12;
-    paintbutton.color = colors[0];
-    paintbutton.highlightColor = colors[1];
-    paintbutton.pressColor = colors[2];
+    paintbutton.color = skyblue;
+    paintbutton.highlightColor = blue;
+    paintbutton.pressColor = blue;;
     paintbutton.labelMinExtent = new Point(36, 18);
     paintbutton.padding = 0;
     paintbutton.labelShadowOffset = new Point(-1, -1);
@@ -1279,7 +1286,7 @@ IDE_Morph.prototype.createCorral = function () {
     }
 
     this.corral = new Morph();
-    this.corral.color = this.groupColor;
+    this.corral.color = pink;
     this.add(this.corral);
 
     this.corral.stageIcon = new SpriteIconMorph(this.stage);
