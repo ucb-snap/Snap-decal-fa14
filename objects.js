@@ -168,27 +168,27 @@ SpriteMorph.prototype.categories =
     ];
 
 SpriteMorph.prototype.blockColor = {
-    motion : new Color(74, 108, 212),
-    looks : new Color(143, 86, 227),
-    sound : new Color(207, 74, 217),
-    pen : new Color(0, 161, 120),
-    control : new Color(230, 168, 34),
-    sensing : new Color(4, 148, 220),
-    operators : new Color(98, 194, 19),
-    variables : new Color(243, 118, 29),
-    lists : new Color(217, 77, 17),
-    other: new Color(150, 150, 150)
+    motion : new Color(72, 61, 139),
+    looks : new Color(72, 61, 139),
+    sound : new Color(72, 61, 139),
+    pen : new Color(72, 61, 139),
+    control : new Color(72, 61, 139),
+    sensing : new Color(72, 61, 139),
+    operators : new Color(72, 61, 139),
+    variables : new Color(72, 61, 139),
+    lists : new Color(72, 61, 139),
+    other: new Color(72, 61, 139)
 };
 
-SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
-SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+SpriteMorph.prototype.paletteColor = new Color(72, 61, 139);
+SpriteMorph.prototype.paletteTextColor = new Color(72, 61, 139);
 SpriteMorph.prototype.sliderColor
     = SpriteMorph.prototype.paletteColor.lighter(30);
 SpriteMorph.prototype.isCachingPrimitives = true;
 
 SpriteMorph.prototype.enableNesting = true;
 SpriteMorph.prototype.useFlatLineEnds = false;
-SpriteMorph.prototype.highlightColor = new Color(250, 200, 130);
+SpriteMorph.prototype.highlightColor = new Color(72, 61, 139);
 SpriteMorph.prototype.highlightBorder = 8;
 
 SpriteMorph.prototype.bubbleColor = new Color(255, 255, 255);
@@ -1022,7 +1022,7 @@ SpriteMorph.prototype.initBlocks = function () {
             type: 'reporter',
             category: 'operators',
             spec: 'split %s by %delim',
-            defaults: [localize('hello') + ' ' + localize('world'), " "]
+            defaults: [localize('Steven') + ' ' + localize('Traversi'), " "]
         },
         reportJSFunction: { // experimental
             type: 'reporter',
