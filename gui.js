@@ -2284,9 +2284,9 @@ IDE_Morph.prototype.projectMenu = function () {
     menu = new MenuMorph(this);
     menu.addItem('Project notes...', 'editProjectNotes');
     menu.addLine();
-    menu.addItem('New', 'createNewProject');
-    menu.addItem('Open...', 'openProjectsBrowser');
-    menu.addItem('Save', "save");
+    menu.addItem('New                          ctrl + n', 'createNewProject');
+    menu.addItem('Open...                 ctrl/⌘ + o', 'openProjectsBrowser');
+    menu.addItem('Save                     ctrl/⌘ + s', "save");
     if (shiftClicked) {
         menu.addItem(
             'Save to disk',
@@ -2295,7 +2295,7 @@ IDE_Morph.prototype.projectMenu = function () {
             new Color(100, 0, 0)
         );
     }
-    menu.addItem('Save As...', 'saveProjectsBrowser');
+    menu.addItem('Save As...  ctrl/⌘ + shift + s', 'saveProjectsBrowser');
     menu.addLine();
     menu.addItem(
         'Import...',

@@ -10321,8 +10321,10 @@ WorldMorph.prototype.initEventListeners = function () {
                 }
                 event.preventDefault();
             }
+            // disables browser shortcuts when conflicting with snap shortcuts
+            var shortcuts = ['U+0053', 'U+004F', 'U+004E', 'U+0046']
             if ((event.ctrlKey || event.metaKey) &&
-                    (event.keyIdentifier !== 'U+0056')) { // allow pasting-in
+                    (shortcuts.indexOf(event.keyIdentifier)) !== -1) {
                 event.preventDefault();
             }
         },
