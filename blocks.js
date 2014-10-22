@@ -3093,15 +3093,8 @@ BlockMorph.prototype.situation = function () {
     return BlockMorph.uber.situation.call(this);
 };
 
-
-BlockMorph.prototype.step = function() {
-    var r = Math.floor(Math.random()*255);
-    var g = Math.floor(Math.random()*255);
-    var b = Math.floor(Math.random()*255);
-    this.setColor(new Color(r, g, b))
-}
-
 // BlockMorph sticky comments
+
 BlockMorph.prototype.prepareToBeGrabbed = function (hand) {
     var myself = this;
     this.allComments().forEach(function (comment) {
