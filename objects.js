@@ -4224,6 +4224,7 @@ StageMorph.prototype.codeMappings = {};
 StageMorph.prototype.codeHeaders = {};
 StageMorph.prototype.enableCodeMapping = false;
 
+
 // StageMorph instance creation
 
 function StageMorph(globals) {
@@ -4682,6 +4683,10 @@ StageMorph.prototype.fireKeyEvent = function (key) {
     }
     if (evt === 'ctrl f') {
         return this.parentThatIsA(IDE_Morph).currentSprite.searchBlocks();
+    }
+    if (evt === 'ctrl m') {
+        console.log('ctrl l pressed');
+        this.parentThatIsA(IDE_Morph).toggleStageSize();
     }
     if (evt === 'ctrl n') {
         return this.parentThatIsA(IDE_Morph).createNewProject();
