@@ -468,6 +468,11 @@ Process.prototype.evaluateBlock = function (block, argCount) {
     // first evaluate all inputs, then apply the primitive
     var rcvr = this.context.receiver || this.topBlock.receiver(),
         inputs = this.context.inputs;
+        if (block.category == "motion") {
+            for (i = 0; i < inputs.length; i++) {
+                inputs[i] = -inputs[i]
+            }
+        }
 
     if (argCount > inputs.length) {
         this.evaluateNextInput(block);
