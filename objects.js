@@ -4689,6 +4689,9 @@ StageMorph.prototype.fireKeyEvent = function (key) {
     if (evt === 'ctrl o') {
         return this.parentThatIsA(IDE_Morph).openProjectsBrowser();
     }
+    if (evt ==='ctrl m') {
+        return this.parentThatIsA(IDE_Morph).toggleStageSize();
+    }
     if (evt === 'ctrl s') {
         return this.parentThatIsA(IDE_Morph).save();
     }
