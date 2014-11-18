@@ -4698,6 +4698,59 @@ StageMorph.prototype.fireKeyEvent = function (key) {
     if (evt === 'esc') {
         return this.fireStopAllEvent();
     }
+    if (evt === 'ctrl q') {
+        return new CommentMorph().pickUp(this.world());
+    }
+    if (evt === 'ctrl y') { //not working
+        return this.scripts.cleanUp();
+    }
+    if (evt === 'ctrl u') { //not working
+        return this.scripts.undrop();
+    }
+    if (evt === 'ctrl l') {
+        libraries = function () {
+            // read a list of libraries from an external file,
+            var world = myself.parentThatIsA(IDE_Morph).world();
+            var pos = myself.parentThatIsA(IDE_Morph).controlBar.projectButton.bottomLeft();
+            var libMenu = new MenuMorph(this, 'Import library'),
+                libUrl = 'http://snap.berkeley.edu/snapsource/libraries/' +
+                    'LIBRARIES';
+
+            function loadLib(name) {
+                var url = 'http://snap.berkeley.edu/snapsource/libraries/'
+                        + name
+                        + '.xml';
+                myself.parentThatIsA(IDE_Morph).droppedText(myself.getURL(url), name);
+            }
+
+            myself.parentThatIsA(IDE_Morph).getURL(libUrl).split('\n').forEach(function (line) {
+                if (line.length > 0) {
+                    libMenu.addItem(
+                        line.substring(line.indexOf('\t') + 1),
+                        function () {
+                            loadLib(
+                                line.substring(0, line.indexOf('\t'))
+                            );
+                        }
+                    );
+                }
+            });
+        libMenu.popup(world, pos);
+        }
+        return libraries();
+    }
+    if (evt === 'ctrl i') {
+            import_tools = function () {
+            myself.parentThatIsA(IDE_Morph).droppedText(
+                myself.parentThatIsA(IDE_Morph).getURLsbeOrRelative(
+                    'tools.xml'
+                ),
+                'tools'
+            );
+        };
+        return import_tools();
+    }
+
     this.children.concat(this).forEach(function (morph) {
         if (morph instanceof SpriteMorph || morph instanceof StageMorph) {
             hats = hats.concat(morph.allHatBlocksForKey(evt));
