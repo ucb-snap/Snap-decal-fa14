@@ -4698,15 +4698,30 @@ StageMorph.prototype.fireKeyEvent = function (key) {
     if (evt === 'esc') {
         return this.fireStopAllEvent();
     }
-    if (evt === 'ctrl q') {
-        return new CommentMorph().pickUp(this.world());
+    if (evt === 'ctrl q') { 
+        return myself.parentThatIsA(IDE_Morph).spriteEditor.contents.addComment();
+        
     }
-    if (evt === 'ctrl y') { //not working
-        return this.scripts.cleanUp();
+    if (evt === 'ctrl y') { 
+        return myself.parentThatIsA(IDE_Morph).spriteEditor.contents.cleanUp();
     }
-    if (evt === 'ctrl u') { //not working
-        return this.scripts.undrop();
+    if (evt === 'ctrl u') { 
+        return myself.parentThatIsA(IDE_Morph).spriteEditor.contents.undrop();
     }
+    if (evt === 'ctrl d') {
+        myself.parentThatIsA(IDE_Morph).spriteEditor.contents.lastDroppedBlock.destroy();
+        myself.parentThatIsA(IDE_Morph).spriteEditor.contents.lastDroppedBlock = null;
+    }
+    if (evt === 'ctrl r') {
+        myself.parentThatIsA(IDE_Morph).spriteEditor.contents.lastDroppedBlock.ringify();
+    }
+    if (evt === 'ctrl e') {
+        var block = myself.parentThatIsA(IDE_Morph).spriteEditor.contents.lastDroppedBlock;
+        if (block.parentThatIsA(RingMorph)) {
+            block.unringify();
+        }
+    }
+
     if (evt === 'ctrl l') {
         libraries = function () {
             // read a list of libraries from an external file,
@@ -4740,7 +4755,7 @@ StageMorph.prototype.fireKeyEvent = function (key) {
         return libraries();
     }
     if (evt === 'ctrl i') {
-            import_tools = function () {
+        import_tools = function () {
             myself.parentThatIsA(IDE_Morph).droppedText(
                 myself.parentThatIsA(IDE_Morph).getURLsbeOrRelative(
                     'tools.xml'
@@ -4749,6 +4764,32 @@ StageMorph.prototype.fireKeyEvent = function (key) {
             );
         };
         return import_tools();
+    }
+
+    if (evt === 'ctrl b') {
+        new_block = function () {
+            new BlockDialogMorph(
+                null,
+                function (definition) {
+                    if (definition.spec !== '') {
+                        if (definition.isGlobal) {
+                            myself.globalBlocks.push(definition);
+                        } else {
+                            myself.customBlocks.push(definition);
+                        }
+                        myself.parentThatIsA(IDE_Morph).flushPaletteCache();
+                        myself.parentThatIsA(IDE_Morph).refreshPalette();
+                        new BlockEditorMorph(definition, myself).popUp();
+                    }
+                },
+                myself
+            ).prompt(
+                'Make a block',
+                null,
+                myself.world()
+            );
+        }
+        return new_block();
     }
 
     this.children.concat(this).forEach(function (morph) {
