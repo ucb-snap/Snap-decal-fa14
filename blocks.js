@@ -2131,7 +2131,6 @@ BlockMorph.prototype.userMenu = function () {
     menu.addItem(
         "duplicate",
         function () {
-            console.log(myself);
             var dup = myself.fullCopy(),
                 ide = myself.parentThatIsA(IDE_Morph);
             dup.pickUp(world);
