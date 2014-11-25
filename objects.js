@@ -4721,9 +4721,24 @@ StageMorph.prototype.fireKeyEvent = function (key) {
             block.unringify();
         }
     }
+    if (evt === 'ctrl c') { 
+        var toCopy = myself.parentThatIsA(IDE_Morph).spriteEditor.contents.lastDroppedBlock; 
+        var copy = function (input) {
+            var dup = input.fullCopy(),
+                ide = input.parentThatIsA(IDE_Morph);
+            dup.pickUp(world);
+            if (ide) {
+                    world.hand.grabOrigin = {
+                    origin: ide.palette,
+                    position: ide.palette.center()
+                };
+            }
+        }
+        copy(toCopy);
+    }
 
     if (evt === 'ctrl l') {
-        libraries = function () {
+        var libraries = function () {
             // read a list of libraries from an external file,
             var world = myself.parentThatIsA(IDE_Morph).world();
             var pos = myself.parentThatIsA(IDE_Morph).controlBar.projectButton.bottomLeft();
@@ -4755,7 +4770,7 @@ StageMorph.prototype.fireKeyEvent = function (key) {
         return libraries();
     }
     if (evt === 'ctrl i') {
-        import_tools = function () {
+        var import_tools = function () {
             myself.parentThatIsA(IDE_Morph).droppedText(
                 myself.parentThatIsA(IDE_Morph).getURLsbeOrRelative(
                     'tools.xml'
@@ -4767,7 +4782,7 @@ StageMorph.prototype.fireKeyEvent = function (key) {
     }
 
     if (evt === 'ctrl b') {
-        new_block = function () {
+        var new_block = function () {
             new BlockDialogMorph(
                 null,
                 function (definition) {
