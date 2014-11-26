@@ -1877,7 +1877,7 @@ BlockMorph.prototype.toggleSnapSound = function () {
         this.snapSound = null;
     } else {
         BlockMorph.prototype.snapSound = document.createElement('audio');
-        BlockMorph.prototype.snapSound.src = 'carl.m4a';
+        BlockMorph.prototype.snapSound.src = 'click.wav';
     }
     CommentMorph.prototype.snapSound = BlockMorph.prototype.snapSound;
 };
@@ -7953,6 +7953,7 @@ SymbolMorph.prototype.symbolWidth = function () {
         return size;
     }
 };
+
 
 SymbolMorph.prototype.drawSymbolStop = function (canvas, color) {
     // answer a canvas showing a vertically centered square

@@ -167,16 +167,8 @@ SpriteMorph.prototype.categories =
         'other'
     ];
 
-purple = new Color(220, 153, 255);
-blue = new Color(81, 203, 255);
-fuschia = new Color(255, 122, 222);
-magenta = new Color(255, 61, 152);
-skyblue = new Color(120, 214, 255);
-pink = new Color(250, 160, 215);
-
-
 SpriteMorph.prototype.blockColor = {
-    motion : magenta,
+    motion : new Color(74, 108, 212),
     looks : new Color(143, 86, 227),
     sound : new Color(207, 74, 217),
     pen : new Color(0, 161, 120),

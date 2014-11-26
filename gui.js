@@ -82,13 +82,6 @@ var WardrobeMorph;
 var SoundIconMorph;
 var JukeboxMorph;
 
-purple = new Color(220, 153, 255);
-blue = new Color(81, 203, 255);
-fuschia = new Color(255, 122, 222);
-magenta = new Color(255, 61, 152);
-skyblue = new Color(120, 214, 255);
-pink = new Color(250, 160, 215);
-
 // IDE_Morph ///////////////////////////////////////////////////////////
 
 // I am SNAP's top-level frame, the Editor window
@@ -99,87 +92,489 @@ IDE_Morph.prototype = new Morph();
 IDE_Morph.prototype.constructor = IDE_Morph;
 IDE_Morph.uber = Morph.prototype;
 
+// New colors
+lightbg = new Color(250, 250, 250); // new background color for FlatDesign lights
+pindigo = new Color(63, 81, 191);   // primary indigo
+dindigo = new Color(48, 63, 159);   // dark indigo
+lblue = new Color(3, 169, 244);     // light blue
+pink = new Color(255, 64, 129);     // pink
+dgray = new Color(250, 250, 250);   // dark gray
+white = new Color(255, 255, 255);   // white
+blue = new Color(33, 150, 243);     // blue
+dblue = new Color(21, 101, 192);    // dark blue
+
+
 // IDE_Morph preferences settings and skins
 
-IDE_Morph.prototype.setDefaultDesign = function () {
+IDE_Morph.prototype.setDefaultDesign = function (colorscheme) {   // EDIT: add colorscheme arg
     MorphicPreferences.isFlat = false;
-    SpriteMorph.prototype.paletteColor = purple;
-    SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
-    StageMorph.prototype.paletteTextColor
-        = SpriteMorph.prototype.paletteTextColor;
-    StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
-    SpriteMorph.prototype.sliderColor
-        = SpriteMorph.prototype.paletteColor.lighter(30);
+    switch(colorscheme) {
+        // EDIT: made more cases both Light and Default, Minh and Kerl were here
+        case 'defaultScheme':
+            SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+            SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor
+                = SpriteMorph.prototype.paletteColor.lighter(30);
 
-    IDE_Morph.prototype.buttonContrast = 30;
-    IDE_Morph.prototype.backgroundColor = magenta;
-    IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+            IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.controlBarColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.categoryButtonColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.frameColor.darker(50);
 
-    IDE_Morph.prototype.groupColor
-        = pink;
-    IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
-    IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
-    IDE_Morph.prototype.tabColors = [
-        IDE_Morph.prototype.groupColor.darker(40),
-        IDE_Morph.prototype.groupColor.darker(60),
-        IDE_Morph.prototype.groupColor
-    ];
-    IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
-    IDE_Morph.prototype.appModeColor = new Color();
-    IDE_Morph.prototype.scriptsPaneTexture = 'unisheengrad.jpg';
-    IDE_Morph.prototype.padding = 5;
+            IDE_Morph.prototype.groupColor
+                = SpriteMorph.prototype.paletteColor.lighter(8);
+            IDE_Morph.prototype.buttonColors = IDE_Morph.prototype.groupColor; 
+            IDE_Morph.prototype.blockMenuColor = IDE_Morph.prototype.groupColor;
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
+            IDE_Morph.prototype.iconLabelColor = IDE_Morph.prototype.buttonLabelColor; 
 
-    SpriteIconMorph.prototype.labelColor
-        = new Color(255, 255, 255);
-    CostumeIconMorph.prototype.labelColor
-        = purple;
-    SoundIconMorph.prototype.labelColor
-        = purple;
-    TurtleIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.darker(40),
+                IDE_Morph.prototype.groupColor.darker(60),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
+            IDE_Morph.prototype.appModeColor = new Color();
+            IDE_Morph.prototype.scriptsPaneTexture = 'scriptsPaneTexture.gif';
+            IDE_Morph.prototype.padding = 5;
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;
+
+        case 'darkBlueScheme':
+            MorphicPreferences.isColorScheme = true;
+            SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+            SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor
+                = SpriteMorph.prototype.paletteColor.lighter(30);
+
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+            IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.controlBarColor = blue;
+            IDE_Morph.prototype.categoryButtonColor = IDE_Morph.prototype.groupColor;
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.frameColor.darker(50);
+
+            IDE_Morph.prototype.groupColor
+                = SpriteMorph.prototype.paletteColor.lighter(8);
+            IDE_Morph.prototype.buttonColors = dblue; 
+            IDE_Morph.prototype.blockMenuColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
+            IDE_Morph.prototype.iconLabelColor = IDE_Morph.prototype.buttonLabelColor; 
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.darker(40),
+                IDE_Morph.prototype.groupColor.darker(60),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
+            IDE_Morph.prototype.appModeColor = new Color();
+            IDE_Morph.prototype.scriptsPaneTexture = 'scriptsPaneTexture.gif';
+            IDE_Morph.prototype.padding = 0;
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;    
+
+        case 'darkIndigoScheme':
+            MorphicPreferences.isColorScheme = true;
+            SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+            SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor
+                = SpriteMorph.prototype.paletteColor.lighter(30);
+
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+            IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.controlBarColor = dindigo;
+            IDE_Morph.prototype.categoryButtonColor = IDE_Morph.prototype.groupColor;
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.frameColor.darker(50);
+
+            IDE_Morph.prototype.groupColor
+                = SpriteMorph.prototype.paletteColor.lighter(8);
+            IDE_Morph.prototype.buttonColors = dindigo; 
+            IDE_Morph.prototype.blockMenuColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
+            IDE_Morph.prototype.iconLabelColor = IDE_Morph.prototype.buttonLabelColor; 
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.darker(40),
+                IDE_Morph.prototype.groupColor.darker(60),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
+            IDE_Morph.prototype.appModeColor = new Color();
+            IDE_Morph.prototype.scriptsPaneTexture = 'scriptsPaneTexture.gif';
+            IDE_Morph.prototype.padding = 0;
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break; 
+
+        case 'blueScheme':
+            MorphicPreferences.isColorScheme = true;
+            SpriteMorph.prototype.paletteColor = dgray.darker(5); // background of block editor
+            SpriteMorph.prototype.paletteTextColor = new Color(70, 70, 70);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor = SpriteMorph.prototype.paletteColor;
+
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(200, 200, 200);
+            IDE_Morph.prototype.frameColor = dgray.darker(5); // top tool bar, middle editing bar, corral bar, sprite icon bg in corral
+            IDE_Morph.prototype.controlBarColor = lblue;    // EDIT: new variable for control bar
+            IDE_Morph.prototype.categoryButtonColor = white;    // EDIT: new variable for color of block category button in menu
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.categoryButtonColor.darker(20);
+
+            IDE_Morph.prototype.groupColor = dgray; // icon backgrounds, main background, block category menu background, corral background
+            IDE_Morph.prototype.buttonColors = lblue;   // EDIT: new variable for color of icons
+            IDE_Morph.prototype.blockMenuColor = dgray.darker(5);
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(70, 70, 70);
+            IDE_Morph.prototype.iconLabelColor = white; // EDIT: new variable color of label for icons
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.lighter(60),
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = [
+                IDE_Morph.prototype.groupColor,
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor.darker(30)
+            ];
+            IDE_Morph.prototype.appModeColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;    // EDIT: padding = 0, no outline
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;
+
+        case 'indigoScheme':
+            MorphicPreferences.isColorScheme = true;
+            SpriteMorph.prototype.paletteColor = dgray.darker(5); // background of block editor
+            SpriteMorph.prototype.paletteTextColor = new Color(70, 70, 70);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor = SpriteMorph.prototype.paletteColor;
+
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(200, 200, 200);
+            IDE_Morph.prototype.frameColor = dgray.darker(5); // top tool bar, middle editing bar, corral bar, sprite icon bg in corral
+            IDE_Morph.prototype.controlBarColor = dindigo;    // EDIT: new variable for control bar
+            IDE_Morph.prototype.categoryButtonColor = white;    // EDIT: new variable for color of block category button in menu
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.categoryButtonColor.darker(20);
+
+            IDE_Morph.prototype.groupColor = dgray; // icon backgrounds, main background, block category menu background, corral background
+            IDE_Morph.prototype.buttonColors = dindigo;   // EDIT: new variable for color of icons
+            IDE_Morph.prototype.blockMenuColor = dgray.darker(5);
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(70, 70, 70);
+            IDE_Morph.prototype.iconLabelColor = white; // EDIT: new variable color of label for icons
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.lighter(60),
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = [
+                IDE_Morph.prototype.groupColor,
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor.darker(30)
+            ];
+            IDE_Morph.prototype.appModeColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;    // EDIT: padding = 0, no outline
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;
+
+        }
 };
 
-IDE_Morph.prototype.setFlatDesign = function () {
+IDE_Morph.prototype.setFlatDesign = function (colorscheme) {   // EDIT: add colorscheme arg
     MorphicPreferences.isFlat = true;
-    SpriteMorph.prototype.paletteColor = new Color(255, 255, 255);
-    SpriteMorph.prototype.paletteTextColor = new Color(70, 70, 70);
-    StageMorph.prototype.paletteTextColor
-        = SpriteMorph.prototype.paletteTextColor;
-    StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
-    SpriteMorph.prototype.sliderColor = SpriteMorph.prototype.paletteColor;
+    // EDIT: made more cases both Light and Default, Minh and Kerl were here
 
-    IDE_Morph.prototype.buttonContrast = 30;
-    IDE_Morph.prototype.backgroundColor = new Color(200, 200, 200);
-    IDE_Morph.prototype.frameColor = new Color(255, 255, 255);
+    switch(colorscheme) {
+        case 'defaultScheme':
+            SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+            SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor
+                = SpriteMorph.prototype.paletteColor.lighter(30);
 
-    IDE_Morph.prototype.groupColor = new Color(230, 230, 230);
-    IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
-    IDE_Morph.prototype.buttonLabelColor = new Color(70, 70, 70);
-    IDE_Morph.prototype.tabColors = [
-        IDE_Morph.prototype.groupColor.lighter(60),
-        IDE_Morph.prototype.groupColor.darker(10),
-        IDE_Morph.prototype.groupColor
-    ];
-    IDE_Morph.prototype.rotationStyleColors = [
-        IDE_Morph.prototype.groupColor,
-        IDE_Morph.prototype.groupColor.darker(10),
-        IDE_Morph.prototype.groupColor.darker(30)
-    ];
-    IDE_Morph.prototype.appModeColor = IDE_Morph.prototype.frameColor;
-    IDE_Morph.prototype.scriptsPaneTexture = null;
-    IDE_Morph.prototype.padding = 1;
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+            IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.controlBarColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.categoryButtonColor = IDE_Morph.prototype.groupColor;
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.frameColor.darker(50);
 
-    SpriteIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
-    CostumeIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
-    SoundIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
-    TurtleIconMorph.prototype.labelColor
-        = IDE_Morph.prototype.buttonLabelColor;
+            IDE_Morph.prototype.groupColor
+                = SpriteMorph.prototype.paletteColor.lighter(8);
+            IDE_Morph.prototype.buttonColors = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.blockMenuColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
+            IDE_Morph.prototype.iconLabelColor = IDE_Morph.prototype.buttonLabelColor;
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.darker(40),
+                IDE_Morph.prototype.groupColor.darker(60),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
+            IDE_Morph.prototype.appModeColor = new Color();
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;
+
+        case 'darkBlueScheme':
+            SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+            SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor
+                = SpriteMorph.prototype.paletteColor.lighter(30);
+
+            IDE_Morph.prototype.buttonContrast = 20;
+            IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+            IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.controlBarColor = blue;
+            IDE_Morph.prototype.categoryButtonColor = IDE_Morph.prototype.groupColor;
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.frameColor.darker(50);
+
+            IDE_Morph.prototype.groupColor
+                = SpriteMorph.prototype.paletteColor.lighter(8);
+            IDE_Morph.prototype.buttonColors = blue; 
+            IDE_Morph.prototype.blockMenuColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
+            IDE_Morph.prototype.iconLabelColor = IDE_Morph.prototype.buttonLabelColor; 
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.darker(40),
+                IDE_Morph.prototype.groupColor.darker(60),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
+            IDE_Morph.prototype.appModeColor = new Color();
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;  
+
+        case 'darkIndigoScheme':
+            SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
+            SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor
+                = SpriteMorph.prototype.paletteColor.lighter(30);
+
+            IDE_Morph.prototype.buttonContrast = 20;
+            IDE_Morph.prototype.backgroundColor = new Color(40, 40, 40);
+            IDE_Morph.prototype.frameColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.controlBarColor = dindigo;
+            IDE_Morph.prototype.categoryButtonColor = IDE_Morph.prototype.groupColor;
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.frameColor.darker(50);
+
+            IDE_Morph.prototype.groupColor
+                = SpriteMorph.prototype.paletteColor.lighter(8);
+            IDE_Morph.prototype.buttonColors = dindigo; 
+            IDE_Morph.prototype.blockMenuColor = SpriteMorph.prototype.paletteColor;
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(255, 255, 255);
+            IDE_Morph.prototype.iconLabelColor = IDE_Morph.prototype.buttonLabelColor; 
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.darker(40),
+                IDE_Morph.prototype.groupColor.darker(60),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = IDE_Morph.prototype.tabColors;
+            IDE_Morph.prototype.appModeColor = new Color();
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break; 
+
+        case 'blueScheme':
+            SpriteMorph.prototype.paletteColor = dgray.darker(5); // background of block editor
+            SpriteMorph.prototype.paletteTextColor = new Color(70, 70, 70);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor = SpriteMorph.prototype.paletteColor;
+
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(200, 200, 200);
+            IDE_Morph.prototype.frameColor = dgray.darker(5); // top tool bar, middle editing bar, corral bar, sprite icon bg in corral
+            IDE_Morph.prototype.controlBarColor = lblue;    // EDIT: new variable for control bar
+            IDE_Morph.prototype.categoryButtonColor = white;    // EDIT: new variable for color of block category button in menu
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.categoryButtonColor.darker(20);
+
+            IDE_Morph.prototype.groupColor = dgray; // icon backgrounds, main background, block category menu background, corral background
+            IDE_Morph.prototype.buttonColors = lblue;   // EDIT: new variable for color of icons
+            IDE_Morph.prototype.blockMenuColor = dgray.darker(5);
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(70, 70, 70);
+            IDE_Morph.prototype.iconLabelColor = white; // EDIT: new variable color of label for icons
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.lighter(60),
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = [
+                IDE_Morph.prototype.groupColor,
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor.darker(30)
+            ];
+            IDE_Morph.prototype.appModeColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;    // EDIT: padding = 0, no outline
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;
+
+        case 'indigoScheme':
+            SpriteMorph.prototype.paletteColor = dgray.darker(5); // background of block editor
+            SpriteMorph.prototype.paletteTextColor = new Color(70, 70, 70);
+            StageMorph.prototype.paletteTextColor
+                = SpriteMorph.prototype.paletteTextColor;
+            StageMorph.prototype.paletteColor = SpriteMorph.prototype.paletteColor;
+            SpriteMorph.prototype.sliderColor = SpriteMorph.prototype.paletteColor;
+
+            IDE_Morph.prototype.buttonContrast = 30;
+            IDE_Morph.prototype.backgroundColor = new Color(200, 200, 200);
+            IDE_Morph.prototype.frameColor = dgray.darker(5); // top tool bar, middle editing bar, corral bar, sprite icon bg in corral
+            IDE_Morph.prototype.controlBarColor = dindigo;    // EDIT: new variable for control bar
+            IDE_Morph.prototype.categoryButtonColor = white;    // EDIT: new variable for color of block category button in menu
+            IDE_Morph.prototype.categoryButtonHoverColor = IDE_Morph.prototype.categoryButtonColor.darker(20);
+
+            IDE_Morph.prototype.groupColor = dgray; // icon backgrounds, main background, block category menu background, corral background
+            IDE_Morph.prototype.buttonColors = dindigo;   // EDIT: new variable for color of icons
+            IDE_Morph.prototype.blockMenuColor = dgray.darker(5);
+            IDE_Morph.prototype.sliderColor = SpriteMorph.prototype.sliderColor;
+            IDE_Morph.prototype.buttonLabelColor = new Color(70, 70, 70);
+            IDE_Morph.prototype.iconLabelColor = white; // EDIT: new variable color of label for icons
+
+            IDE_Morph.prototype.tabColors = [
+                IDE_Morph.prototype.groupColor.lighter(60),
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor
+            ];
+            IDE_Morph.prototype.rotationStyleColors = [
+                IDE_Morph.prototype.groupColor,
+                IDE_Morph.prototype.groupColor.darker(10),
+                IDE_Morph.prototype.groupColor.darker(30)
+            ];
+            IDE_Morph.prototype.appModeColor = IDE_Morph.prototype.frameColor;
+            IDE_Morph.prototype.scriptsPaneTexture = null;
+            IDE_Morph.prototype.padding = 0;    // EDIT: padding = 0, no outline
+
+            SpriteIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            CostumeIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            SoundIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            TurtleIconMorph.prototype.labelColor
+                = IDE_Morph.prototype.buttonLabelColor;
+            break;
+
+        }
 };
 
-IDE_Morph.prototype.setDefaultDesign();
+// IDE_Morph.prototype.setDefaultDesign();
+IDE_Morph.prototype.setDefaultDesign('defaultScheme');    // EDIT: pass in defaultScheme arg
 
 // IDE_Morph instance creation:
 
@@ -416,7 +811,7 @@ IDE_Morph.prototype.createLogo = function () {
     }
 
     this.logo = new Morph();
-    this.logo.texture = 'carlbody.png';
+    this.logo.texture = 'snap_logo_sm.png';
     this.logo.drawNew = function () {
         this.image = newCanvas(this.extent());
         var context = this.image.getContext('2d'),
@@ -426,10 +821,10 @@ IDE_Morph.prototype.createLogo = function () {
                 this.width(),
                 0
             );
-        gradient.addColorStop(0, 'magenta');
-        gradient.addColorStop(0.5, purple.toString());
+        // gradient.addColorStop(0, 'black');   // EDIT: remove gradient
+        gradient.addColorStop(0.5, myself.controlBarColor.toString());  // EDIT: change frameColor
         context.fillStyle = MorphicPreferences.isFlat ?
-                myself.frameColor.toString() : gradient;
+                myself.controlBarColor.toString() : gradient;
         context.fillRect(0, 0, this.width(), this.height());
         if (this.texture) {
             this.drawTexture(this.texture);
@@ -469,9 +864,9 @@ IDE_Morph.prototype.createControlBar = function () {
         cloudButton,
         x,
         colors = [
-            this.groupColor,
-            this.frameColor.darker(50),
-            this.frameColor.darker(50)
+            this.buttonColors,  // EDIT: change from groupColor
+            this.buttonColors.darker(50), // EDIT: change frameColor
+            this.buttonColors.darker(50)
         ],
         myself = this;
 
@@ -480,7 +875,7 @@ IDE_Morph.prototype.createControlBar = function () {
     }
 
     this.controlBar = new Morph();
-    this.controlBar.color = purple;
+    this.controlBar.color = this.controlBarColor;   // EDIT: change from frameColor
     this.controlBar.setHeight(this.logo.height()); // height is fixed
     this.controlBar.mouseClickLeft = function () {
         this.world().fillPage();
@@ -502,14 +897,14 @@ IDE_Morph.prototype.createControlBar = function () {
     );
 
     button.corner = 12;
-    button.color = skyblue;
-    button.highlightColor = blue;
-    button.pressColor = blue;
+    button.color = colors[0];
+    button.highlightColor = colors[1];
+    button.pressColor = colors[2];
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
-    button.labelShadowColor = magenta;
-    button.labelColor = this.buttonLabelColor;
+    button.labelShadowColor = colors[1];
+    button.labelColor = this.iconLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
     // button.hint = 'stage size\nsmall & normal';
@@ -534,14 +929,14 @@ IDE_Morph.prototype.createControlBar = function () {
     );
 
     button.corner = 12;
-    button.color = skyblue;
-    button.highlightColor = blue;
-    button.pressColor = blue;
+    button.color = colors[0];
+    button.highlightColor = colors[1];
+    button.pressColor = colors[2];
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
-    button.labelShadowColor = blue;
-    button.labelColor = this.buttonLabelColor;
+    button.labelShadowColor = colors[1];
+    button.labelColor = this.iconLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
     // button.hint = 'app & edit\nmodes';
@@ -636,14 +1031,14 @@ IDE_Morph.prototype.createControlBar = function () {
         //'\u270E'
     );
     button.corner = 12;
-    button.color = skyblue;
-    button.highlightColor = blue;
-    button.pressColor = blue;
+    button.color = colors[0];
+    button.highlightColor = colors[1];
+    button.pressColor = colors[2];
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
     button.labelShadowColor = colors[1];
-    button.labelColor = this.buttonLabelColor;
+    button.labelColor = this.iconLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
     // button.hint = 'open, save, & annotate project';
@@ -660,14 +1055,14 @@ IDE_Morph.prototype.createControlBar = function () {
         //'\u2699'
     );
     button.corner = 12;
-    button.color = skyblue;
-    button.highlightColor = blue;
-    button.pressColor = blue;
+    button.color = colors[0];
+    button.highlightColor = colors[1];
+    button.pressColor = colors[2];
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
     button.labelShadowColor = colors[1];
-    button.labelColor = this.buttonLabelColor;
+    button.labelColor = this.iconLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
     // button.hint = 'edit settings';
@@ -683,14 +1078,14 @@ IDE_Morph.prototype.createControlBar = function () {
         new SymbolMorph('cloud', 11)
     );
     button.corner = 12;
-    button.color = skyblue;
-    button.highlightColor = blue;
-    button.pressColor = blue;
+    button.color = colors[0];
+    button.highlightColor = colors[1];
+    button.pressColor = colors[2];
     button.labelMinExtent = new Point(36, 18);
     button.padding = 0;
     button.labelShadowOffset = new Point(-1, -1);
     button.labelShadowColor = colors[1];
-    button.labelColor = this.buttonLabelColor;
+    button.labelColor = this.iconLabelColor;
     button.contrast = this.buttonContrast;
     button.drawNew();
     // button.hint = 'cloud operations';
@@ -752,10 +1147,10 @@ IDE_Morph.prototype.createControlBar = function () {
             true,
             false,
             false,
-            MorphicPreferences.isFlat ? null : new Point(2, 1),
+            (MorphicPreferences.isFlat || MorphicPreferences.isColorScheme) ? null : new Point(2, 1),
             myself.frameColor.darker(myself.buttonContrast)
         );
-        this.label.color = myself.buttonLabelColor;
+        this.label.color = myself.iconLabelColor;
         this.label.drawNew();
         this.add(this.label);
         this.label.setCenter(this.center());
@@ -771,14 +1166,14 @@ IDE_Morph.prototype.createCategories = function () {
         this.categories.destroy();
     }
     this.categories = new Morph();
-    this.categories.color = this.groupColor;
+    this.categories.color = this.blockMenuColor;    // EDIT: bg of block category menu
     this.categories.silentSetWidth(this.logo.width()); // width is fixed
 
     function addCategoryButton(category) {
         var labelWidth = 75,
-            colors = [
-                myself.frameColor,
-                myself.frameColor.darker(50),
+            colors = [  // EDIT: background of block category buttons, hover, pressed
+                myself.categoryButtonColor,     // EDIT: from frameColor
+                myself.categoryButtonHoverColor,   // EDIT: from frameColor.darker(50)
                 SpriteMorph.prototype.blockColor[category]
             ],
             button;
@@ -938,7 +1333,7 @@ IDE_Morph.prototype.createSpriteBar = function () {
     }
 
     this.spriteBar = new Morph();
-    this.spriteBar.color = pink;
+    this.spriteBar.color = this.frameColor;
     this.add(this.spriteBar);
 
     function addRotationStyleButton(rotationStyle) {
@@ -1045,10 +1440,10 @@ IDE_Morph.prototype.createSpriteBar = function () {
     padlock.highlightColor = tabColors[0];
     padlock.pressColor = tabColors[1];
 
-    padlock.tick.shadowOffset = MorphicPreferences.isFlat ?
+    padlock.tick.shadowOffset = (MorphicPreferences.isFlat || MorphicPreferences.isColorScheme) ?
             new Point() : new Point(-1, -1);
     padlock.tick.shadowColor = new Color(); // black
-    padlock.tick.color = fuschia;
+    padlock.tick.color = this.buttonLabelColor;
     padlock.tick.isBold = false;
     padlock.tick.drawNew();
 
@@ -1145,7 +1540,44 @@ IDE_Morph.prototype.createSpriteBar = function () {
 IDE_Morph.prototype.createSpriteEditor = function () {
     // assumes that the logo pane and the stage have already been created
     var scripts = this.currentSprite.scripts,
-        myself = this;
+        myself = this,
+        fab = new PushButtonMorph(
+            null,
+            function () {
+                var ide = myself.parentThatIsA(IDE_Morph),
+                    stage = myself.parentThatIsA(StageMorph);
+                new BlockDialogMorph(
+                    null,
+                    function (definition) {
+                        if (definition.spec !== '') {
+                            if (definition.isGlobal) {
+                                stage.globalBlocks.push(definition);
+                            } else {
+                                myself.customBlocks.push(definition);
+                            }
+                            ide.flushPaletteCache();
+                            ide.refreshPalette();
+                            new BlockEditorMorph(definition, myself).popUp();
+                        }
+                    },
+                    myself
+                ).prompt(
+                    'Make a block',
+                    null,
+                    myself.world()
+                );
+            },
+            // 'Make a block'
+            "+"
+        );
+        function helpMenu() {
+            var menu = new MenuMorph(this);
+            menu.addItem('help...', 'showHelp');
+            return menu;
+        }
+        fab.userMenu = helpMenu;
+        fab.selector = 'addCustomBlock';
+        fab.showHelp = BlockMorph.prototype.showHelp;
 
     if (this.spriteEditor) {
         this.spriteEditor.destroy();
@@ -1161,6 +1593,27 @@ IDE_Morph.prototype.createSpriteEditor = function () {
             null,
             this.sliderColor
         );
+
+        fab.corner = 20;
+        fab.color = pink;
+        fab.highlightedColor = pink;
+        fab.pressColor = pink.darker(10);
+        fab.labelMinExtent = new Point(30, 30);
+        fab.padding = 0;
+        fab.labelShadowOffset = null;
+        fab.labelShadowColor = pink;
+        fab.labelColor = white;
+        fab.contrast = this.buttonContrast;
+        fab.drawNew();
+
+        x = this.stage.right() + 50;
+        // fab.setCenter(this.spriteEditor.center());
+        fab.setBottom(x);
+        fab.setRight(x);
+
+        fab.fixLayout();
+        this.spriteEditor.add(fab);
+
         this.spriteEditor.padding = 10;
         this.spriteEditor.growth = 50;
         this.spriteEditor.isDraggable = false;
@@ -1215,9 +1668,9 @@ IDE_Morph.prototype.createCorralBar = function () {
         newbutton,
         paintbutton,
         colors = [
-            this.groupColor,
-            this.frameColor.darker(50),
-            this.frameColor.darker(50)
+            this.buttonColors,
+            this.buttonColors.darker(50),
+            this.buttonColors.darker(50)
         ];
 
     if (this.corralBar) {
@@ -1225,7 +1678,7 @@ IDE_Morph.prototype.createCorralBar = function () {
     }
 
     this.corralBar = new Morph();
-    this.corralBar.color = purple;
+    this.corralBar.color = this.controlBarColor;    // EDIT: change from frameColor
     this.corralBar.setHeight(this.logo.height()); // height is fixed
     this.add(this.corralBar);
 
@@ -1236,14 +1689,14 @@ IDE_Morph.prototype.createCorralBar = function () {
         new SymbolMorph("turtle", 14)
     );
     newbutton.corner = 12;
-    newbutton.color = skyblue;
-    newbutton.highlightColor = blue;
-    newbutton.pressColor = blue;
+    newbutton.color = colors[0];
+    newbutton.highlightColor = colors[1];
+    newbutton.pressColor = colors[2];
     newbutton.labelMinExtent = new Point(36, 18);
     newbutton.padding = 0;
     newbutton.labelShadowOffset = new Point(-1, -1);
     newbutton.labelShadowColor = colors[1];
-    newbutton.labelColor = this.buttonLabelColor;
+    newbutton.labelColor = this.iconLabelColor;
     newbutton.contrast = this.buttonContrast;
     newbutton.drawNew();
     newbutton.hint = "add a new Turtle sprite";
@@ -1258,14 +1711,14 @@ IDE_Morph.prototype.createCorralBar = function () {
         new SymbolMorph("brush", 15)
     );
     paintbutton.corner = 12;
-    paintbutton.color = skyblue;
-    paintbutton.highlightColor = blue;
-    paintbutton.pressColor = blue;;
+    paintbutton.color = colors[0];
+    paintbutton.highlightColor = colors[1];
+    paintbutton.pressColor = colors[2];
     paintbutton.labelMinExtent = new Point(36, 18);
     paintbutton.padding = 0;
     paintbutton.labelShadowOffset = new Point(-1, -1);
     paintbutton.labelShadowColor = colors[1];
-    paintbutton.labelColor = this.buttonLabelColor;
+    paintbutton.labelColor = this.iconLabelColor;
     paintbutton.contrast = this.buttonContrast;
     paintbutton.drawNew();
     paintbutton.hint = "paint a new sprite";
@@ -1286,7 +1739,7 @@ IDE_Morph.prototype.createCorral = function () {
     }
 
     this.corral = new Morph();
-    this.corral.color = pink;
+    this.corral.color = this.groupColor;
     this.add(this.corral);
 
     this.corral.stageIcon = new SpriteIconMorph(this.stage);
@@ -1683,14 +2136,16 @@ IDE_Morph.prototype.selectSprite = function (sprite) {
 
 // IDE_Morph skins
 
-IDE_Morph.prototype.defaultDesign = function () {
-    this.setDefaultDesign();
+IDE_Morph.prototype.defaultDesign = function (colorscheme) {    // EDIT: add colorscheme arg
+    // this.setDefaultDesign();
+    this.setDefaultDesign(colorscheme);     // EDIT: default color scheme
     this.refreshIDE();
     this.removeSetting('design');
 };
 
-IDE_Morph.prototype.flatDesign = function () {
-    this.setFlatDesign();
+IDE_Morph.prototype.flatDesign = function (colorscheme) {   // EDIT: add colorscheme arg
+    // this.setFlatDesign();
+    this.setFlatDesign(colorscheme);     // EDIT: default color scheme
     this.refreshIDE();
     this.saveSetting('design', 'flat');
 };
@@ -1726,12 +2181,15 @@ IDE_Morph.prototype.applySavedSettings = function () {
         click = this.getSetting('click'),
         longform = this.getSetting('longform'),
         plainprototype = this.getSetting('plainprototype');
+        colorscheme = this.getSetting('colorscheme');     // EDIT: apply saved setting for color scheme
 
-    // design
+    // design       // EDIT: apply colorscheme arg for set design funcs
     if (design === 'flat') {
-        this.setFlatDesign();
+        // this.setFlatDesign();
+        this.setFlatDesign(colorscheme);
     } else {
-        this.setDefaultDesign();
+        // this.setDefaultDesign();
+        this.setDefaultDesign(colorscheme);
     }
 
     // blocks zoom
@@ -1761,7 +2219,7 @@ IDE_Morph.prototype.applySavedSettings = function () {
     // plain prototype labels
     if (plainprototype) {
         BlockLabelPlaceHolderMorph.prototype.plainLabel = true;
-    }
+    } 
 };
 
 IDE_Morph.prototype.saveSetting = function (key, value) {
@@ -2102,6 +2560,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         'Stage size...',
         'userSetStageSize'
     );
+    menu.addItem('Color scheme...', 'colorSchemeMenu');    // EDIT: add Color Scheme menu item
     menu.addLine();
     addPreference(
         'Blurred shadows',
@@ -2216,12 +2675,12 @@ IDE_Morph.prototype.settingsMenu = function () {
     addPreference(
         'Flat design',
         function () {
-            if (MorphicPreferences.isFlat) {
+            if (MorphicPreferences.isFlat || MorphicPreferences.isColorScheme) {
                 return myself.defaultDesign();
             }
             myself.flatDesign();
         },
-        MorphicPreferences.isFlat,
+        (MorphicPreferences.isFlat || MorphicPreferences.isColorScheme),
         'uncheck for default\nGUI design',
         'check for alternative\nGUI design',
         false
@@ -3310,7 +3769,7 @@ IDE_Morph.prototype.toggleAppMode = function (appMode) {
         });
     } else {
         this.setColor(this.backgroundColor);
-        this.controlBar.setColor(this.frameColor);
+        this.controlBar.setColor(this.controlBarColor); // EDIT: change frameColor
         elements.forEach(function (e) {
             e.show();
         });
@@ -3394,6 +3853,102 @@ IDE_Morph.prototype.saveProjectsBrowser = function () {
         this.source = 'local'; // cannot save to examples
     }
     new ProjectDialogMorph(this, 'save').popUp();
+};
+
+// EDIT: set color scheme
+IDE_Morph.prototype.setColorScheme = function(colorscheme) {
+//     if (this.getSetting('colorscheme') === colorscheme) {
+//         console.log("current color scheme is different from colorscheme " + colorscheme);
+        if (MorphicPreferences.isFlat) {
+            this.flatDesign(colorscheme);
+        } else {
+            this.defaultDesign(colorscheme);
+        }
+        // console.log("setting colorscheme to: " + colorscheme);
+        this.saveSetting('colorscheme', colorscheme);
+    // }
+};
+
+// EDIT: returns string
+IDE_Morph.prototype.colorSchemeName = function(colorscheme) {
+    switch(colorscheme) {
+        case 'blueScheme':
+            return 'Blue';
+            break;
+        case 'indigoScheme':
+            return 'Indigo';
+            break;
+        case 'darkBlueScheme':
+            return 'Dark Blue';
+            break;
+        case 'darkIndigoScheme':
+            return 'Dark Indigo';
+            break;
+        default: 
+            return 'Default'; 
+    }
+};
+
+// EDIT: return list of all color schemes
+// IDE_Morph.prototype.colorSchemes = function() {
+//     var colorschemes = [
+//         'defaultScheme', 
+//         'lightScheme'
+//     ];
+//     return colorschemes;
+// };
+
+// EDIT: colorSchemeMenu, the popup menu for color schemes, Minh and Kerl were here
+IDE_Morph.prototype.colorSchemeMenu = function () {
+    // function setColorScheme(colorscheme) {
+    //     this.saveSetting('colorscheme', colorscheme);
+    // };
+    // console.log("\nin color scheme menu\n");
+    // var schemeMenu = new MenuMorph(this),
+    //     world = this.world(),
+    //     pos = this.controlBar.settingsButton.bottomLeft(),
+    //     myself = this;
+    // var colorschemeslst = [
+    //     'defaultScheme', 
+    //     'lightScheme'
+    // ];
+    // // addPreference(
+    // //     'Default',
+    // //     setScheme(defaultScheme), 
+    // //     (make a function that checks the current scheme),
+    // //     'uncheck for default color scheme',
+    // //     'check for this color scheme',
+    // //     false;
+    // // )
+
+    // // schemeMenu.addItem('Default', myself.setColorScheme('defaultScheme'));
+
+    // colorschemeslst.forEach(function (scheme) {
+    //     schemeMenu.addItem(
+    //         (myself.getSetting('colorscheme') === scheme ? '\u2713 ' : '    ') +
+    //             myself.colorSchemeName(scheme), 
+    //         myself.setColorScheme(scheme)
+    //     );
+    // });
+    // schemeMenu.popup(world, pos);
+    var menu = new MenuMorph(this),
+        world = this.world(),
+        pos = this.controlBar.settingsButton.bottomLeft(),
+        myself = this;
+        colorschemeslst = [
+        'defaultScheme', 
+        'darkBlueScheme',
+        'darkIndigoScheme',
+        'blueScheme',
+        'indigoScheme'
+        ];
+    colorschemeslst.forEach(function (scheme) {
+        menu.addItem(
+            (myself.getSetting('colorscheme') === scheme ? '\u2713 ' : '    ') + myself.colorSchemeName(scheme),
+            function () {myself.setColorScheme(scheme); }
+        );
+    });
+    menu.popup(world, pos);
 };
 
 // IDE_Morph localization
@@ -4005,7 +4560,7 @@ IDE_Morph.prototype.cloudError = function () {
 
 IDE_Morph.prototype.cloudIcon = function (height, color) {
     var clr = color || DialogBoxMorph.prototype.titleBarColor,
-        isFlat = MorphicPreferences.isFlat,
+        isFlat = MorphicPreferences.isFlat || MorphicPreferences.isColorScheme,
         icon = new SymbolMorph(
             isFlat ? 'cloud' : 'cloudGradient',
             height || 50,
@@ -5712,7 +6267,7 @@ TurtleIconMorph.prototype.init = function (aSpriteOrStage, aTemplate) {
 };
 
 TurtleIconMorph.prototype.createThumbnail = function () {
-    var isFlat = MorphicPreferences.isFlat;
+    var isFlat = MorphicPreferences.isFlat || MorphicPreferences.isColorScheme;
 
     if (this.thumbnail) {
         this.thumbnail.destroy();
